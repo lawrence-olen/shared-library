@@ -36,7 +36,7 @@ def call(PipelineConfig cfg, String buildNumber) {
         def gitMsg = sh(script: 'git log -1 --pretty=%s', returnStdout: true).trim().replace('"', '\\"')
 
         sh """
-            DOCKER_BUILDKIT=1 docker build \
+            DOCKER_BUILDKIT=1 docker build --no-cache \
               --build-arg BUILD_NUMBER=${buildNumber} \
               --build-arg COMMIT_SHA=${gitSha} \
               --build-arg "COMMIT_MESSAGE=${gitMsg}" \
