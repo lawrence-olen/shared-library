@@ -23,6 +23,7 @@ def call(Map args = [:]) {
               -v \$(pwd):/workspace \
               ${cacheVolume} \
               aquasec/trivy:latest fs \
+              --timeout 30m \
               --scanners vuln,secret,config \
               --severity HIGH,CRITICAL \
               --exit-code ${exitCode} \
@@ -36,6 +37,7 @@ def call(Map args = [:]) {
               -v /var/run/docker.sock:/var/run/docker.sock \
               ${cacheVolume} \
               aquasec/trivy:latest image \
+              --timeout 30m \
               --severity HIGH,CRITICAL \
               --exit-code ${exitCode} \
               ${target}
